@@ -12,7 +12,7 @@ class AddCourse extends Component {
       constructor(props) {
       super(props);
       this.state = {open: false, course:{ } };
-    };
+    }
     
     handleClickOpen = () => {
       this.setState( {open:true} );
