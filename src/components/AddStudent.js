@@ -7,11 +7,11 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 
-// properties addCoure is required, function called when Add clicked.
-class AddCourse extends Component {
+// properties addStudent is required, function called when Add clicked.
+class  AddStudent extends Component {
       constructor(props) {
       super(props);
-      this.state = {open: false, course:{ } }
+      this.state = {open: false, student_name : '', email : '' }
     }
     
     handleClickOpen = () => {
@@ -22,13 +22,14 @@ class AddCourse extends Component {
       this.setState( {open:false} );
     };
 
+    
     handleChange = (event) => {
-      this.setState({course:{course_id: event.target.value}});
+      this.setState({[event.target.name]: event.target.value});
     }
 
-  // Save course and close modal form
-    handleAdd = () => {
-       this.props.addCourse(this.state.course);
+  // Save student info and close modal form
+    handleAdd = (student_name, email) => {
+       this.props.addStudent(this.state.student_name, this.state.email);
        this.handleClose();
     }
 
@@ -36,12 +37,14 @@ class AddCourse extends Component {
       return (
           <div>
             <Button variant="outlined" color="primary" style={{margin: 10}} onClick={this.handleClickOpen}>
-              Add Course
+              Add Student
             </Button>
             <Dialog open={this.state.open} onClose={this.handleClose}>
-                <DialogTitle>Add Course</DialogTitle>
+                <DialogTitle>Add Student</DialogTitle>
                 <DialogContent>
-                  <TextField autoFocus fullWidth label="Course Id" name="course_id" onChange={this.handleChange}/> 
+                {this.state.student_name} {this.state.email}
+                  <TextField autoFocus fullWidth label="Student Name" name="student_name" onChange={this.handleChange} value={this.state.student_name}/> 
+                  <TextField autoFocus fullWidth label="Student Email" name="email" onChange={this.handleChange} value={this.state.email}/> 
                 </DialogContent>
                 <DialogActions>
                   <Button color="secondary" onClick={this.handleClose}>Cancel</Button>
@@ -54,8 +57,8 @@ class AddCourse extends Component {
 }
 
 // required property:  addCourse is a function to call to perform the Add action
-AddCourse.propTypes = {
-  addCourse : PropTypes.func.isRequired
+AddStudent.propTypes = {
+  addStudent : PropTypes.func.isRequired
 }
 
-export default AddCourse;
+export default AddStudent;

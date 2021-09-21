@@ -8,10 +8,9 @@ import Radio from '@material-ui/core/Radio';
 import {DataGrid} from '@material-ui/data-grid';
 import {SEMESTER_LIST} from '../constants.js'
 import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import Cookies from 'js-cookie';
 import {SERVER_URL} from '../constants.js'
-import NewStudent from './NewStudent';
+import AddStudent from './AddStudent';
 
 // user selects from a list of  (year, semester) values
 class Semester extends Component {
@@ -25,36 +24,36 @@ class Semester extends Component {
     this.setState({selected: event.target.value});
   }
   
-  //TODO
-  // Add Student
-  addStudent = (student_name, email) => {
-    const token = Cookies.get('XSRF-TOKEN');
- 
-    fetch(`${SERVER_URL}/new-student?name=${student_name}&email=${email}`,
-      { 
-        method: 'POST', 
-        headers: { 'Content-Type': 'application/json',
-                   'X-XSRF-TOKEN': token  }, 
-        body: JSON.stringify(student_name, email)
-      })
-    .then(res => {
-        if (res.ok) {
-          toast.success("Student successfully added", {
-              position: toast.POSITION.BOTTOM_LEFT
-          });
-        } else {
-          toast.error("Error when adding", {
-              position: toast.POSITION.BOTTOM_LEFT
-          });
-          console.error('Post http status =' + res.status);
-        }})
-    .catch(err => {
-      toast.error("Error when adding", {
+// Add student
+addStudent = (student_name, email) => {
+  const token = Cookies.get('XSRF-TOKEN');
+
+  fetch(`${SERVER_URL}/new-student?name=${student_name}&email=${email}`,
+    { 
+      method: 'POST', 
+      headers: { 'Content-Type': 'application/json',
+                 'X-XSRF-TOKEN': token  }, 
+      body: JSON.stringify(student_name, email)
+    })
+  .then(res => {
+      if (res.ok) {
+        toast.success("Student successfully added", {
             position: toast.POSITION.BOTTOM_LEFT
         });
-        console.error(err);
-    })
-  } 
+        // this.addStudent(student_name, email);
+      } else {
+        toast.error("Error when adding", {
+            position: toast.POSITION.BOTTOM_LEFT
+        });
+        console.error('Post http status =' + res.status);
+      }})
+  .catch(err => {
+    toast.error("Error when adding", {
+          position: toast.POSITION.BOTTOM_LEFT
+      });
+      console.error(err);
+  })
+}
 
   render() {    
       const icolumns = [
@@ -65,7 +64,7 @@ class Semester extends Component {
         renderCell: (params) => (
           <div>
             <Radio
-              checked={params.row.id == this.state.selected}
+              checked={params.row.id === this.state.selected}
               onChange={this.onRadioClick}
               value={params.row.id}
               color="default"
@@ -98,10 +97,9 @@ class Semester extends Component {
                 variant="outlined" color="primary" style={{margin: 10}}>
                 Get Schedule
               </Button>
-
-              <NewStudent addStudent={this.addStudent}  />
+              <AddStudent addStudent={this.addStudent}  />
           </div>
-          <ToastContainer autoClose={1500} />
+          <ToastContainer autoClose={1500} />  
       </div>
     )
   }
