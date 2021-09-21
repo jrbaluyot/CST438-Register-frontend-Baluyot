@@ -40,7 +40,6 @@ addStudent = (student_name, email) => {
         toast.success("Student successfully added", {
             position: toast.POSITION.BOTTOM_LEFT
         });
-        // this.addStudent(student_name, email);
       } else {
         toast.error("Error when adding", {
             position: toast.POSITION.BOTTOM_LEFT
