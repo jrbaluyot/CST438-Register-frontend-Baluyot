@@ -41,13 +41,13 @@ addStudent = (student_name, email) => {
             position: toast.POSITION.BOTTOM_LEFT
         });
       } else {
-        toast.error("Error when adding", {
+        toast.error("Error when creating new student", {
             position: toast.POSITION.BOTTOM_LEFT
         });
         console.error('Post http status =' + res.status);
       }})
   .catch(err => {
-    toast.error("Error when adding", {
+    toast.error("Error when creating new student", {
           position: toast.POSITION.BOTTOM_LEFT
       });
       console.error(err);
@@ -96,6 +96,7 @@ addStudent = (student_name, email) => {
                 variant="outlined" color="primary" style={{margin: 10}}>
                 Get Schedule
               </Button>
+              
               <AddStudent addStudent={this.addStudent}  />
           </div>
           <ToastContainer autoClose={1500} />  

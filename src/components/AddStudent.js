@@ -33,6 +33,7 @@ class  AddStudent extends Component {
        this.handleClose();
     }
 
+    // Same as Addcourse render(), but for AddStudent
     render()  { 
       return (
           <div>
@@ -56,7 +57,7 @@ class  AddStudent extends Component {
     }
 }
 
-// required property:  addCourse is a function to call to perform the Add action
+// required property:  addStudent is a function to call to perform the Add action
 AddStudent.propTypes = {
   addStudent : PropTypes.func.isRequired
 }
