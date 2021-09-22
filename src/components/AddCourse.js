@@ -7,7 +7,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 
-// properties addCoure is required, function called when Add clicked.
+// properties addCourse is required, function called when Add clicked.
 class AddCourse extends Component {
       constructor(props) {
       super(props);
