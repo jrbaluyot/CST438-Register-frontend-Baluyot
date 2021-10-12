@@ -33,6 +33,7 @@ addStudent = (student_name, email) => {
       method: 'POST', 
       headers: { 'Content-Type': 'application/json',
                  'X-XSRF-TOKEN': token  }, 
+                 credentials: 'include',
       body: JSON.stringify(student_name, email)
     })
   .then(res => {
